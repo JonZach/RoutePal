@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+
+require_relative 'bootstrap_ar'
+database = ENV['FP_ENV'] || 'development'
+connect_to database
+
+# ARGV = [add, foo]
+command = ARGV[0]
+appointment_address = ARGV[1] # can be nil
+
+params = { command: command, appointment: { address: appointment_address } }
+controller = RoutePalController.new(params)
+routes = { "add" => :create, "list" => :index, "remove" => :destroy }
+
+# This is a router:
+if route = routes[command]
+  controller.send route
+else
+  unless command == "help"
+    puts "RoutePal does not (yet?) support the '#{command}' command.\n\n"
+  end
+  puts <<EOS
+Currently supported commands are:
+* routepal list
+* routepal add <appointment_address>
+* routepal remove <appointment_address>
+
+See the README for more details
+EOS
+end
