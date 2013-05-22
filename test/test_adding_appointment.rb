@@ -5,7 +5,7 @@ class TestAddingAppointment < Test::Unit::TestCase
     # start with no appointments
     assert_equal 0, Appointment.count
     # `ruby routepal add foo`
-    appointment = Appointment.create( address: 'foo' )
+    appointment = Appointment.create( address: 'foo')
     # appointment => #<Appointment:12312 @address='foo'>
     # end up with a 'foo' appointment
     assert_equal 1, Appointment.count
