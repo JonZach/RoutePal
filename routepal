@@ -5,16 +5,21 @@ database = ENV['FP_ENV'] || 'development'
 connect_to database
 
 # ARGV = [add, foo]
-command = ARGV[0]
+command = nil
+command = ARGV[0].downcase unless ARGV[0].nil?
 appointment_address = ARGV[1] # can be nil
 
 params = { command: command, appointment: { address: appointment_address } }
-controller = RoutePalController.new(params)
-routes = { "add" => :create, "list" => :index, "remove" => :destroy }
+appointment_controller = AppointmentController.new(params)
+vendor_controller = VendorController.new(params)
+routes = { "add" => :create, "list" => :index, "remove" => :destroy, "vendors"  => :list_vendors}
+
 
 # This is a router:
 if route = routes[command]
-  controller.send route
+  appointment_controller.send route
+elsif command == nil
+  Home.render_home
 else
   unless command == "help"
     puts "RoutePal does not (yet?) support the '#{command}' command.\n\n"
@@ -24,6 +29,7 @@ Currently supported commands are:
 * routepal list
 * routepal add <appointment_address>
 * routepal remove <appointment_address>
+* routepal vendors
 
 See the README for more details
 EOS

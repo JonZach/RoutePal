@@ -9,5 +9,6 @@ module DatabaseCleaner
   def before_setup
     super
     Appointment.destroy_all
+    Vendor.destroy_all
   end
 end
