@@ -21,8 +21,8 @@ class TestAddingVendor < Test::Unit::TestCase
     puts `ruby routepal signup chip`
     puts `ruby routepal signup green`
     puts `ruby routepal signup lsi`
-    #count is 4 because test_helper only deletes before it runs test file, NOT each test
-    assert_equal 5, Vendor.count
+    #count is 4 because test_helper only deletes before it runs test file, NOT each test..Not 5 b/c no dupes
+    assert_equal 4, Vendor.count
   end
 
   # def test_03_takes_multiple_vendor_arguments_and_uses_them
