@@ -23,8 +23,17 @@ class AppointmentController
 
   def destroy
     matching_appointments = Appointment.where(address: params[:appointment][:address]).all
-    matching_appointmentss.each do |appointment|
+    matching_appointments.each do |appointment|
       appointment.destroy
+    end
+  end
+
+  def new_vendor
+    vendor = Vendor.new(params[:vendor])
+    if vendor.save
+      puts "Success!"
+    else
+      puts "Failure :( #{vendor.errors.full_messages.join(", ")}"
     end
   end
 

@@ -10,7 +10,23 @@ class TestAddingVendor < Test::Unit::TestCase
   end
 
   def test_02_takes_vendor_arguments_and_uses_them
-    puts `ruby routepal add quality`
+    puts `ruby routepal signup quality`
     assert_equal 'quality', Vendor.last.vendor_name
   end
+  
+  def test_03_create_muliple_vendors
+    # vendor = Vendor.create( vendor_name: 'lsi')
+    # vendor = Vendor.create( vendor_name: 'green')
+    # vendor = Vendor.create( vendor_name: 'chip')
+    puts `ruby routepal signup chip`
+    puts `ruby routepal signup green`
+    puts `ruby routepal signup lsi`
+    #count is 4 because test_helper only deletes before it runs test file, NOT each test
+    assert_equal 5, Vendor.count
+  end
+
+  # def test_03_takes_multiple_vendor_arguments_and_uses_them
+  #   puts `ruby routepal add quality`
+  #   assert_equal 'quality', Vendor.last.vendor_name
+  # end
 end

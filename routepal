@@ -7,30 +7,48 @@ connect_to database
 # ARGV = [add, foo]
 command = nil
 command = ARGV[0].downcase unless ARGV[0].nil?
-appointment_address = ARGV[1] # can be nil
+vendor_dba = ARGV[1] if command == 'signup' || 'vendors'
+appointment_address = ARGV[1] if command != 'signup' || 'vendors' # can be nil
+appointment_date = ARGV[2] unless command == 'signup'
 
-params = { command: command, appointment: { address: appointment_address } }
+params = { command: command, appointment: { address: appointment_address, appt_date: appointment_date } }
+vendor_params = { command: command, vendor: { vendor_name: vendor_dba } }
 appointment_controller = AppointmentController.new(params)
-vendor_controller = VendorController.new(params)
-routes = { "add" => :create, "list" => :index, "remove" => :destroy, "vendors"  => :list_vendors}
+vendor_controller = VendorController.new(vendor_params)
+# routes = { "add" => :create, "list" => :index, "remove" => :destroy, "signup" => :new_vendor, "vendors"  => :list_vendors}
 
+
+case command
+when nil
+  Home.render_home
+when 'add'
+  appointment_controller.create
+when 'list'
+  appointment_controller.index
+when 'remove'
+  appointment_controller.destroy
+when 'signup'
+    vendor_controller.new_vendor
+when 'vendors'
+    vendor_controller.list_vendors
 
 # This is a router:
-if route = routes[command]
-  appointment_controller.send route
-elsif command == nil
-  Home.render_home
-else
-  unless command == "help"
-    puts "RoutePal does not (yet?) support the '#{command}' command.\n\n"
-  end
-  puts <<EOS
-Currently supported commands are:
-* routepal list
-* routepal add <appointment_address>
-* routepal remove <appointment_address>
-* routepal vendors
+# if route = routes[command]
+#  appointment_controller.send route
+# elsif command == nil
+#  Home.render_home
+# else
+#  unless command == "help"
+#    puts "RoutePal does not (yet?) support the '#{command}' command.\n\n"
+#  end
+#  puts <<EOS
+# Currently supported commands are:
+# * routepal list
+# * routepal add <appointment_address>
+# * routepal remove <appointment_address>
+# * routepal signup <vendor_name>
+# * routepal vendors
 
-See the README for more details
-EOS
+# See the README for more details
+# EOS
 end

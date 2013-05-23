@@ -1,8 +1,8 @@
 class VendorController
   #include Formatter
 
-  def initialize params
-    @params = params
+  def initialize vendor_params
+    @vendor_params = vendor_params
   end
 
   def index
@@ -12,8 +12,8 @@ class VendorController
     end
   end
 
-  def create
-    vendor = Vendor.new(params[:vendor])
+  def new_vendor
+    vendor = Vendor.new(vendor_params[:vendor])
     if vendor.save
       puts "Success!"
     else
@@ -21,8 +21,15 @@ class VendorController
     end
   end
 
+  def list_vendors
+    all_vendors = Vendor.all
+    all_vendors.each_with_index do |vendor, i|
+      puts "#{i+1}. #{vendor.vendor_name}"
+    end
+  end
+
   def destroy
-    matching_vendors = Vendor.where(vendor_name: params[:vendor][:vendor_name]).all
+    matching_vendors = Vendor.where(vendor_name: vendor_params[:vendor][:vendor_name]).all
     matching_vendors.each do |vendor|
       vendor.destroy
     end
@@ -31,7 +38,7 @@ class VendorController
 
   private
 
-  def params
-    @params
+  def vendor_params
+    @vendor_params
   end
 end
