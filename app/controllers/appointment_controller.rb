@@ -1,5 +1,6 @@
 class AppointmentController
-  #include Formatter
+
+  CLEAR = '\e[H\e[2J'
 
   def initialize params
     @params = params
@@ -13,7 +14,15 @@ class AppointmentController
   end
 
   def create
-    appointment = Appointment.new(params[:appointment])
+    puts CLEAR
+    #appointment = Appointment.new(params[:appointment])
+    puts 'Please enter the address for the appointment.'
+    jobsite = gets.chomp
+    puts 'Please enter appointment date in the form (mm.dd.yyyy).'
+    day_of_job = gets.chomp
+    #appointment.update_attributes( address: jobsite, appt_date: day_of_job )
+    appointment = Appointment.create( address: jobsite, appt_date: day_of_job )
+    #appointment = Appointment.new(params[:appointment])
     if appointment.save
       puts "Success!"
     else

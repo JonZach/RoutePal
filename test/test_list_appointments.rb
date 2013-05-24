@@ -6,7 +6,7 @@ class TestListAppointments < Test::Unit::TestCase
   def test_01_list_when_there_are_no_appointments
     assert Appointment.all.empty?
     actual = `ruby routepal list`
-    assert_equal "", actual
+    assert_equal '', actual
   end
 
   def test_02_list_multiple_appointments

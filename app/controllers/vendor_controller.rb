@@ -5,13 +5,6 @@ class VendorController
     @vendor_params = vendor_params
   end
 
-  def index
-    vendors = Vendor.all
-    vendors.each_with_index do |vendor, i|
-      puts "#{i+1}. #{vendor.vendor_name}"
-    end
-  end
-
   def new_vendor
     vendor = Vendor.new(vendor_params[:vendor])
     if vendor.save

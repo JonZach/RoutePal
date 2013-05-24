@@ -1,3 +1,5 @@
+require './app/controllers/appointment_controller'
+require './app/controllers/vendor_controller'
 require "bundler"
 Bundler.setup
 require "rubygems"

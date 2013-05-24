@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+# use geokit.rubyforge.org for routing distances
+
 require_relative 'bootstrap_ar'
 database = ENV['FP_ENV'] || 'development'
 connect_to database
@@ -7,12 +9,14 @@ connect_to database
 # ARGV = [add, foo]
 command = nil
 command = ARGV[0].downcase unless ARGV[0].nil?
-vendor_dba = ARGV[1] if command == 'signup' || 'vendors'
-appointment_address = ARGV[1] if command != 'signup' || 'vendors' # can be nil
-appointment_date = ARGV[2] unless command == 'signup'
+#vendor_dba = ARGV[1] if command == 'signup' || 'vendors'
+#appointment_address = ARGV[1] if command != 'signup' || 'vendors' # can be nil
+#appointment_date = ARGV[2] unless command == 'signup'
 
-params = { command: command, appointment: { address: appointment_address, appt_date: appointment_date } }
-vendor_params = { command: command, vendor: { vendor_name: vendor_dba } }
+#params = { command: command, appointment: { address: appointment_address, appt_date: appointment_date } }
+#vendor_params = { command: command, vendor: { vendor_name: vendor_dba } }
+params = { command: command, appointment: { address: ARGV[1], appt_date: ARGV[2] } }
+vendor_params = { command: command, vendor: { vendor_name: ARGV[1]} }
 appointment_controller = AppointmentController.new(params)
 vendor_controller = VendorController.new(vendor_params)
 # routes = { "add" => :create, "list" => :index, "remove" => :destroy, "signup" => :new_vendor, "vendors"  => :list_vendors}
@@ -20,6 +24,8 @@ vendor_controller = VendorController.new(vendor_params)
 
 case command
 when nil
+    puts 'Please enter a valid command. Type "ruby routepal home" to see list of commands.'
+when 'home'
   Home.render_home
 when 'add'
   appointment_controller.create
@@ -32,23 +38,4 @@ when 'signup'
 when 'vendors'
     vendor_controller.list_vendors
 
-# This is a router:
-# if route = routes[command]
-#  appointment_controller.send route
-# elsif command == nil
-#  Home.render_home
-# else
-#  unless command == "help"
-#    puts "RoutePal does not (yet?) support the '#{command}' command.\n\n"
-#  end
-#  puts <<EOS
-# Currently supported commands are:
-# * routepal list
-# * routepal add <appointment_address>
-# * routepal remove <appointment_address>
-# * routepal signup <vendor_name>
-# * routepal vendors
-
-# See the README for more details
-# EOS
 end
