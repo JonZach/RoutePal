@@ -19,15 +19,20 @@ EOS
 
             Want This?                            Type This
             ===============================================
-            Home Screen:                    routepal <home>
-            Add Appointment:         routepal add <address>
-            Add Vendor:       routepal signup <vendor_name>
-            List Appointments:                routepal list
-            List Vendors:                  routepal vendors
+            Home Screen:                           routepal
+            Login:                                    login
+            Add Appointment:                            add
+            Add Vendor:                              signup
+            List Appointments:                         list
+            List Vendors:                           vendors
             Delete Appointment:   routepal remove <address>
+            ===============================================
+
+            Please type a command from above to get started.
+            
 EOS
 
-        actual = `ruby routepal home`
+        actual = `ruby routepal`
         expected = logo + menu
         assert_equal expected, actual
     end

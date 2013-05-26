@@ -14,14 +14,14 @@ class AppointmentController
   end
 
   def create
-    puts CLEAR
-    #appointment = Appointment.new(params[:appointment])
-    puts 'Please enter the address for the appointment.'
-    jobsite = gets.chomp
-    puts 'Please enter appointment date in the form (mm.dd.yyyy).'
-    day_of_job = gets.chomp
+    #puts CLEAR
+    appointment = Appointment.new(params[:appointment])
+    # puts 'Please enter the address for the appointment.'
+    # jobsite = gets.chomp
+    # puts 'Please enter appointment date in the form (mm.dd.yyyy).'
+    # day_of_job = gets.chomp
     #appointment.update_attributes( address: jobsite, appt_date: day_of_job )
-    appointment = Appointment.create( address: jobsite, appt_date: day_of_job )
+    #appointment = Appointment.create( address: jobsite, appt_date: day_of_job )
     #appointment = Appointment.new(params[:appointment])
     if appointment.save
       puts "Success!"

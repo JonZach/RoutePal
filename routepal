@@ -6,36 +6,38 @@ require_relative 'bootstrap_ar'
 database = ENV['FP_ENV'] || 'development'
 connect_to database
 
+include Home
+
+render_home
+
 # ARGV = [add, foo]
-command = nil
-command = ARGV[0].downcase unless ARGV[0].nil?
+#command = nil
+#command = ARGV[0].downcase unless ARGV[0].nil?
 #vendor_dba = ARGV[1] if command == 'signup' || 'vendors'
 #appointment_address = ARGV[1] if command != 'signup' || 'vendors' # can be nil
 #appointment_date = ARGV[2] unless command == 'signup'
 
 #params = { command: command, appointment: { address: appointment_address, appt_date: appointment_date } }
 #vendor_params = { command: command, vendor: { vendor_name: vendor_dba } }
-params = { command: command, appointment: { address: ARGV[1], appt_date: ARGV[2] } }
-vendor_params = { command: command, vendor: { vendor_name: ARGV[1]} }
-appointment_controller = AppointmentController.new(params)
-vendor_controller = VendorController.new(vendor_params)
+#params = { command: command, appointment: { address: ARGV[1], appt_date: ARGV[2] } }
+#vendor_params = { command: command, vendor: { vendor_name: ARGV[1]} }
+#appointment_controller = AppointmentController.new(params)
+#vendor_controller = VendorController.new(vendor_params)
 # routes = { "add" => :create, "list" => :index, "remove" => :destroy, "signup" => :new_vendor, "vendors"  => :list_vendors}
 
 
-case command
-when nil
-    puts 'Please enter a valid command. Type "ruby routepal home" to see list of commands.'
-when 'home'
-  Home.render_home
-when 'add'
-  appointment_controller.create
-when 'list'
-  appointment_controller.index
-when 'remove'
-  appointment_controller.destroy
-when 'signup'
-    vendor_controller.new_vendor
-when 'vendors'
-    vendor_controller.list_vendors
-
-end
+#case command
+#when nil
+ #   puts 'Please enter a valid command. Type "ruby routepal home" to see list of commands.'
+#when 'home'
+  #Home.render_home
+#when 'add'
+ # appointment_controller.create
+#when 'list'
+ # appointment_controller.index
+#when 'remove'
+ # appointment_controller.destroy
+#when 'signup'
+ #   vendor_controller.new_vendor
+#when 'vendors'
+#    vendor_controller.list_vendors
