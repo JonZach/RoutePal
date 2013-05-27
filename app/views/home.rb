@@ -96,13 +96,21 @@ EOS
       filter = gets.chomp.downcase
       if filter == 'all'
         appointments = Appointment.where(vendor_name: input)
-        appointments.each_with_index do |appointment, i|
-          puts "#{i+1}. #{appointment.address}" + "\n ""  #{appointment.appt_date}"
+        if appointments.empty?
+          puts "You have no appointments scheduled."
+        else
+          appointments.each_with_index do |appointment, i|
+            puts "#{i+1}. #{appointment.address}" + "\n ""  #{appointment.appt_date}"
+          end
         end
       else 
         appointments = Appointment.where(appt_date: filter)
-        appointments.each_with_index do |appointment, i|
-          puts "#{i+1}. #{appointment.address}" + "\n ""  #{appointment.appt_date}"
+        if appointments.empty?
+          puts "You have no appointments on this date."
+        else
+          appointments.each_with_index do |appointment, i|
+            puts "#{i+1}. #{appointment.address}" + "\n ""  #{appointment.appt_date}"
+          end
         end
       end
       return_to_home
