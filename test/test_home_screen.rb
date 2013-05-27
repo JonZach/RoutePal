@@ -22,10 +22,11 @@ EOS
             Home Screen:                           routepal
             Login:                                    login
             Add Appointment:                            add
-            Add Vendor:                              signup
+            Create New Vendor:                       signup
             List Appointments:                         list
             List Vendors:                           vendors
-            Delete Appointment:   routepal remove <address>
+            Delete Appointment:                      remove
+            Exit RoutePal:                               :q
             ===============================================
 
             Please type a command from above to get started.

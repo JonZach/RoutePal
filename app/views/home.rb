@@ -19,12 +19,12 @@ EOS
             Want This?                            Type This
             ===============================================
             Home Screen:                           routepal
-            Login:                                    login
             Add Appointment:                            add
-            Add Vendor:                              signup
+            Create New Vendor:                       signup
             List Appointments:                         list
             List Vendors:                           vendors
-            Delete Appointment:   routepal remove <address>
+            Delete Appointment:                      remove
+            Exit RoutePal:                               :q
             ===============================================
 
             Please type a command from above to get started.
@@ -49,13 +49,17 @@ EOS
 
     def create
       puts CLEAR
+      puts "Please enter your vendor name to see your appointments."
+      vendor = gets.chomp.downcase
+      puts "Enter your password"
+      password = gets.chomp.downcase
       #appointment = Appointment.new(params[:appointment])
       puts 'Please enter the address for the appointment.'
       input = gets.chomp
       puts 'Please enter appointment date in the form (mm.dd.yyyy).'
       input2 = gets.chomp
       #appointment.update_attributes( address: jobsite, appt_date: day_of_job )
-      appointment = Appointment.create( address: input, appt_date: input2 )
+      appointment = Appointment.create( address: input, appt_date: input2, vendor_name: vendor )
       #appointment = Appointment.new(params[:appointment])
       if appointment.save
         puts "Success!"
@@ -75,7 +79,7 @@ EOS
       vendor = Vendor.create( vendor_name: input, password: input2 )
       puts CLEAR
       if vendor.save
-        puts "Success!"
+        puts "Success!\n" + "You're vendor name is #{input}.\n You're password is #{input2}."
       else
         puts "Failure :( #{vendor.errors.full_messages.join(", ")}"
       end
@@ -83,9 +87,14 @@ EOS
     end
 
     def index
-      appointments = Appointment.all
+      puts "Please enter your vendor name to see your appointments."
+      input = gets.chomp.downcase
+      puts "Enter your password"
+      password = gets.chomp.downcase
+      puts CLEAR
+      appointments = Appointment.where(vendor_name: input)
       appointments.each_with_index do |appointment, i|
-        puts "#{i+1}. #{appointment.address}"
+        puts "#{i+1}. #{appointment.address}" + "\n ""  #{appointment.appt_date}"
       end
       return_to_home
     end
@@ -93,12 +102,16 @@ EOS
     def list_vendors
       all_vendors = Vendor.all
       all_vendors.each_with_index do |vendor, i|
-        puts "#{i+1}. #{vendor.vendor_name}"
+        puts "#{i+1}. #{vendor.vendor_name}" + " #{vendor.password}"
       end
       return_to_home
     end
 
     def destroy
+      # appointments = Appointment.all
+      # appointments.each do |appointment|
+      #   appointment.destroy
+      # end
       puts CLEAR
       puts 'Please enter the appointment address you wish to delete.'
       input = gets.chomp.downcase
@@ -115,10 +128,6 @@ EOS
       else
         puts "Failure :( #{vendor.errors.full_messages.join(", ")}"
       end
-      # matching_appointments.each do |appointment|
-      #   appointment.destroy
-      #end
-      #return_to_home
     end
 
     def return_to_home
