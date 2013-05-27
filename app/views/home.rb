@@ -92,9 +92,18 @@ EOS
       puts "Enter your password"
       password = gets.chomp.downcase
       puts CLEAR
-      appointments = Appointment.where(vendor_name: input)
-      appointments.each_with_index do |appointment, i|
-        puts "#{i+1}. #{appointment.address}" + "\n ""  #{appointment.appt_date}"
+      puts "Welcome #{input}.\nTo see your appointments by date enter date (mm.dd.yyyy) else enter 'all'."
+      filter = gets.chomp.downcase
+      if filter == 'all'
+        appointments = Appointment.where(vendor_name: input)
+        appointments.each_with_index do |appointment, i|
+          puts "#{i+1}. #{appointment.address}" + "\n ""  #{appointment.appt_date}"
+        end
+      else 
+        appointments = Appointment.where(appt_date: filter)
+        appointments.each_with_index do |appointment, i|
+          puts "#{i+1}. #{appointment.address}" + "\n ""  #{appointment.appt_date}"
+        end
       end
       return_to_home
     end
