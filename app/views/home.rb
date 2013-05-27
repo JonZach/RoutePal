@@ -42,6 +42,8 @@ EOS
           index
         elsif input == 'vendors'
           list_vendors
+        elsif input == 'remove'
+          destroy
         end
     end
 
@@ -94,6 +96,29 @@ EOS
         puts "#{i+1}. #{vendor.vendor_name}"
       end
       return_to_home
+    end
+
+    def destroy
+      puts CLEAR
+      puts 'Please enter the appointment address you wish to delete.'
+      input = gets.chomp.downcase
+      matching_appointment = Appointment.where(address: input).first
+      matching_appointment.destroy
+      if matching_appointment.save
+        puts "Your appointment has been deleted successfully." + "\n" + "Would you like to delete another appointment? (y/n)"
+        input2 = gets.chomp.downcase
+        if input2 == 'y'
+          destroy
+        else
+          render_home
+        end
+      else
+        puts "Failure :( #{vendor.errors.full_messages.join(", ")}"
+      end
+      # matching_appointments.each do |appointment|
+      #   appointment.destroy
+      #end
+      #return_to_home
     end
 
     def return_to_home
