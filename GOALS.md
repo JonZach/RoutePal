@@ -20,7 +20,8 @@ RoutePal uses simple one word input commands for ease of use.
 
 <hr />
 
-Basic app commands include:<br />
+How it Works<br />
+Basic app commands include:
     - 'routepal'.....launch app and return to main menu
     - 'signup'.......create new vendor
     - 'add'..........add appointment
