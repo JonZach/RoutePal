@@ -49,7 +49,7 @@ EOS
 
     def create
       puts CLEAR
-      puts "Please enter your vendor name to see your appointments."
+      puts "Please enter your vendor name to add a new appointment."
       vendor = gets.chomp.downcase
       puts "Enter your password"
       password = gets.chomp.downcase
@@ -76,7 +76,9 @@ EOS
       puts CLEAR
       puts 'Please enter a password for your profile (lowercase only).'
       input2 = gets.chomp.downcase
-      vendor = Vendor.create( vendor_name: input, password: input2 )
+      puts 'Please enter your business address.'
+      starting_location = gets.chomp.downcase
+      vendor = Vendor.create( vendor_name: input, password: input2, vendor_location: starting_location )
       puts CLEAR
       if vendor.save
         puts "Success!\n" + "You're vendor name is #{input}.\n You're password is #{input2}."
