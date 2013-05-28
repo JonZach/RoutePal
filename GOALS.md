@@ -22,12 +22,12 @@ RoutePal uses simple one word input commands for ease of use.
 
 How it Works<br />
 Basic app commands include:
-    - 'routepal'.....launch app and return to main menu
-    - 'signup'.......create new vendor
-    - 'add'..........add appointment
-    - 'list'.........list appointments
-    - 'remove'.......delete appointment
-    - 'vendors'......list vendors
-    - ':q'...........exit application
+    - 'routepal' ----> launch app and return to main menu
+    - 'signup'  ----> create new vendor
+    - 'add'  ---->  add appointment
+    - 'list' ----> list appointments
+    - 'remove' ----> delete appointment
+    - 'vendors' ----> list vendors
+    - ':q' ----> exit application
 
 <hr />
