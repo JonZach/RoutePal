@@ -13,7 +13,9 @@ The goal of this project is to create a tool for GreenPal vendors to see a list 
 
 Project Status / TODO
 ---------------------
-This project is currently in the planning stages.
+
+[![Build Status](https://travis-ci.org/JonZach/RoutePal.png)](https://travis-ci.org/JonZach/RoutePal)
+Basic functionality complete
 
 Features
 --------
