@@ -107,24 +107,10 @@ EOS
         puts "Welcome #{input}.\nTo see your appointments by date enter date (mm.dd.yyyy) else enter 'all'."
         filter = gets.chomp.downcase
           if filter == 'all'
-      #   appointments = Appointment.where(vendor_name: input)
-      #   if appointments.empty?
-      #     puts "You have no appointments scheduled."
-      #   else
             show_appointments(appointments)
-            # appointments.each_with_index do |appointment, i|
-            #   puts "#{i+1}. #{appointment.address}\n   #{appointment.appt_date}"
-            # end
-      #   end
           else 
             appointments = Appointment.where(appt_date: filter)
-      #   if appointments.empty?
-      #     puts "You have no appointments on this date."
-      #   else
             show_appointments(appointments)
-            # appointments.each_with_index do |appointment, i|
-            #   puts "#{i+1}. #{appointment.address}\n   #{appointment.appt_date}"
-            # end
           end
       else
         puts "You have no appointments scheduled at this time.\n"
