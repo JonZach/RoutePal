@@ -1,4 +1,5 @@
 RoutePal 
+[![Code Climate](https://codeclimate.com/github/JonZach/RoutePal.png)](https://codeclimate.com/github/JonZach/RoutePal)
 =====================
 
 
