@@ -76,8 +76,12 @@ EOS
       starting_location = gets.chomp.downcase
       vendor = Vendor.create( vendor_name: input, password: input2, vendor_location: starting_location )
       puts CLEAR
+      success(vendor)
+    end
+
+    def success(vendor)
       if vendor.save
-        puts "Success!\nYou're vendor name is #{input}.\n You're password is #{input2}."
+        puts "Success!\nYou're vendor name is #{vendor.vendor_name}.\n You're password is #{vendor.password}."
       else
         puts "Failure :( #{vendor.errors.full_messages.join(", ")}"
       end
