@@ -63,9 +63,9 @@ EOS
 
     def save_appointment(appointment)
       if appointment.save
-        puts "Success!\nYou're appointment on #{appointment.appt_date} at #{appointment.address} has been saved."
+        puts "Awesome!\nYou're appointment on #{appointment.appt_date} at #{appointment.address} has been saved."
       else
-        puts "Failure :( #{appointment.errors.full_messages.join(", ")}"
+        puts "Failure :( . You're appointment did not save."
       end
       return_to_home
     end
@@ -87,7 +87,7 @@ EOS
       if vendor.save
         puts "Success!\nYou're vendor name is #{vendor.vendor_name}.\n You're password is #{vendor.password}."
       else
-        puts "Failure :( #{vendor.errors.full_messages.join(", ")}"
+        puts "No Dice!! :( #{vendor.errors.full_messages.join(", ")}"
       end
       return_to_home
     end
