@@ -53,14 +53,11 @@ EOS
       vendor = gets.chomp.downcase
       puts "Enter your password"
       password = gets.chomp.downcase
-      #appointment = Appointment.new(params[:appointment])
       puts 'Please enter the address for the appointment.'
       input = gets.chomp
       puts 'Please enter appointment date in the form (mm.dd.yyyy).'
       input2 = gets.chomp
-      #appointment.update_attributes( address: jobsite, appt_date: day_of_job )
       appointment = Appointment.create( address: input, appt_date: input2, vendor_name: vendor )
-      #appointment = Appointment.new(params[:appointment])
       if appointment.save
         puts "Success!"
       else
@@ -73,7 +70,6 @@ EOS
       puts CLEAR
       puts 'Please enter the vendor name you wish to go by.'
       input = gets.chomp.downcase
-      puts CLEAR
       puts 'Please enter a password for your profile (lowercase only).'
       input2 = gets.chomp.downcase
       puts 'Please enter your business address.'
@@ -81,7 +77,7 @@ EOS
       vendor = Vendor.create( vendor_name: input, password: input2, vendor_location: starting_location )
       puts CLEAR
       if vendor.save
-        puts "Success!\n" + "You're vendor name is #{input}.\n You're password is #{input2}."
+        puts "Success!\nYou're vendor name is #{input}.\n You're password is #{input2}."
       else
         puts "Failure :( #{vendor.errors.full_messages.join(", ")}"
       end
@@ -127,17 +123,13 @@ EOS
     end
 
     def destroy
-      # appointments = Appointment.all
-      # appointments.each do |appointment|
-      #   appointment.destroy
-      # end
       puts CLEAR
       puts 'Please enter the appointment address you wish to delete.'
       input = gets.chomp.downcase
       matching_appointment = Appointment.where(address: input).first
       matching_appointment.destroy
       if matching_appointment.save
-        puts "Your appointment has been deleted successfully." + "\n" + "Would you like to delete another appointment? (y/n)"
+        puts "Your appointment has been deleted successfully.\nWould you like to delete another appointment? (y/n)"
         input2 = gets.chomp.downcase
         if input2 == 'y'
           destroy
@@ -150,7 +142,7 @@ EOS
     end
 
     def return_to_home
-      puts "\n" + 'Enter "routepal" to return to the home screen.'
+      puts "\nEnter 'routepal' to return to the home screen."
       input = gets.chomp
       if input == 'routepal'
         render_home
