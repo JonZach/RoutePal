@@ -98,7 +98,7 @@ EOS
           puts "You have no appointments scheduled."
         else
           appointments.each_with_index do |appointment, i|
-            puts "#{i+1}. #{appointment.address}" + "\n ""  #{appointment.appt_date}"
+            puts "#{i+1}. #{appointment.address}\n   #{appointment.appt_date}"
           end
         end
       else 
@@ -107,7 +107,7 @@ EOS
           puts "You have no appointments on this date."
         else
           appointments.each_with_index do |appointment, i|
-            puts "#{i+1}. #{appointment.address}" + "\n ""  #{appointment.appt_date}"
+            puts "#{i+1}. #{appointment.address}\n   #{appointment.appt_date}"
           end
         end
       end
