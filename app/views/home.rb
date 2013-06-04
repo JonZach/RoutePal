@@ -39,7 +39,7 @@ EOS
         elsif input == 'signup'
           new_vendor
         elsif input == 'list'
-          index
+          login
         elsif input == 'vendors'
           list_vendors
         elsif input == 'remove'
@@ -92,12 +92,16 @@ EOS
       return_to_home
     end
 
-    def index
+    def login
       puts "Please enter your vendor name to see your appointments."
       input = gets.chomp.downcase
       puts "Enter your password"
       password = gets.chomp.downcase
       puts CLEAR
+      index(input)
+    end
+
+    def index(input)
       puts "Welcome #{input}.\nTo see your appointments by date enter date (mm.dd.yyyy) else enter 'all'."
       filter = gets.chomp.downcase
       if filter == 'all'
