@@ -111,21 +111,34 @@ EOS
       #   if appointments.empty?
       #     puts "You have no appointments scheduled."
       #   else
-            appointments.each_with_index do |appointment, i|
-              puts "#{i+1}. #{appointment.address}\n   #{appointment.appt_date}"
-            end
+            show_appointments(appointments)
+            # appointments.each_with_index do |appointment, i|
+            #   puts "#{i+1}. #{appointment.address}\n   #{appointment.appt_date}"
+            # end
       #   end
           else 
             appointments = Appointment.where(appt_date: filter)
       #   if appointments.empty?
       #     puts "You have no appointments on this date."
       #   else
-            appointments.each_with_index do |appointment, i|
-              puts "#{i+1}. #{appointment.address}\n   #{appointment.appt_date}"
-            end
+            show_appointments(appointments)
+            # appointments.each_with_index do |appointment, i|
+            #   puts "#{i+1}. #{appointment.address}\n   #{appointment.appt_date}"
+            # end
           end
       else
         puts "You have no appointments scheduled at this time.\n"
+      end
+      return_to_home
+    end
+
+    def show_appointments(appointments)
+      if appointments.empty?
+        puts "You have no appointments scheduled on this date.\n"
+      else
+        appointments.each_with_index do |appointment, i|
+          puts "#{i+1}. #{appointment.address}\n   #{appointment.appt_date}"
+        end
       end
       return_to_home
     end
