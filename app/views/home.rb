@@ -137,16 +137,20 @@ EOS
       matching_appointment = Appointment.where(address: input).first
       matching_appointment.destroy
       if matching_appointment.save
+        remove_appt
+      else
+        puts "Failure :( #{vendor.errors.full_messages.join(", ")}"
+      end
+    end
+
+    def remove_appt
         puts "Your appointment has been deleted successfully.\nWould you like to delete another appointment? (y/n)"
-        input2 = gets.chomp.downcase
-        if input2 == 'y'
+        input = gets.chomp.downcase
+        if input == 'y'
           destroy
         else
           render_home
         end
-      else
-        puts "Failure :( #{vendor.errors.full_messages.join(", ")}"
-      end
     end
 
     def return_to_home
