@@ -58,8 +58,12 @@ EOS
       puts 'Please enter appointment date in the form (mm.dd.yyyy).'
       input2 = gets.chomp
       appointment = Appointment.create( address: input, appt_date: input2, vendor_name: vendor )
+      save_appointment(appointment)
+    end
+
+    def save_appointment(appointment)
       if appointment.save
-        puts "Success!"
+        puts "Success!\nYou're appointment on #{appointment.appt_date} at #{appointment.address} has been saved."
       else
         puts "Failure :( #{appointment.errors.full_messages.join(", ")}"
       end
